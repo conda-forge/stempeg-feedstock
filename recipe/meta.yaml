@@ -10,22 +10,24 @@ source:
   sha256: f2266ad32d4e4ff3a936279b62a48ba58e6ada32f0e5ee53f4968877c0148136
 
 build:
-  number: 0
+  number: 1
   script: "{{ PYTHON }} -m pip install . -vv"
   noarch: python
 
 requirements:
   host:
-    - python
+    - python {{ python_min }}
     - pip
   run:
-    - python
+    - python >={{ python_min }}
     - ffmpeg
     - setuptools
     - numpy >=1.6
     - pysoundfile >=0.9.0
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - stempeg
 
