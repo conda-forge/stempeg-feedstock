@@ -1,5 +1,5 @@
 {% set name = "stempeg" %}
-{% set version = "0.1.8" %}
+{% set version = "0.2.4" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
-  sha256: f2266ad32d4e4ff3a936279b62a48ba58e6ada32f0e5ee53f4968877c0148136
+  sha256: e587007187f05215e50d92a693f2ca0d84aef6f45ae6212f85d5a8455f7b2bb1
 
 build:
   number: 0
