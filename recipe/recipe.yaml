@@ -1,0 +1,51 @@
+schema_version: 1
+
+context:
+  name: stempeg
+  version: "0.1.8"
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
+  sha256: f2266ad32d4e4ff3a936279b62a48ba58e6ada32f0e5ee53f4968877c0148136
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv
+  python:
+    entry_points:
+      - stem2files = stempeg.cli:cli
+
+requirements:
+  host:
+    - python
+    - pip
+  run:
+    - python
+    - ffmpeg
+    - setuptools
+    - numpy >=1.6
+    - pysoundfile >=0.9.0
+
+tests:
+  - python:
+      imports:
+        - stempeg
+      pip_check: false
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: Python tool to read and write STEM files
+  homepage: https://github.com/faroit/stempeg
+  repository: https://github.com/faroit/stempeg
+  documentation: https://github.com/faroit/stempeg
+
+extra:
+  recipe-maintainers:
+    - Faylixe
+
