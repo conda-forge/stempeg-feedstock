@@ -2,15 +2,19 @@ schema_version: 1
 
 context:
   name: stempeg
-  version: "0.1.8"
+  version: "0.2.6"
+  commit: a41eaabb6761c9cdc3a079c45a1a2ccd575afea6
 
 package:
   name: ${{ name|lower }}
   version: ${{ version }}
 
 source:
-  url: https://pypi.io/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
-  sha256: f2266ad32d4e4ff3a936279b62a48ba58e6ada32f0e5ee53f4968877c0148136
+  url: https://github.com/faroit/${{ name }}/archive/${{ commit }}.tar.gz
+  sha256: 0c3ea84042d6fa20ecd26bb5d056ce74af7e68a6768f9b05f3651352394e4dc9
+  filter:
+    exclude:
+      - stempeg/data/*
 
 build:
   number: 0
@@ -24,12 +28,11 @@ requirements:
   host:
     - python ${{ python_min }}.*
     - pip
-  run:
-    - python
-    - ffmpeg
     - setuptools
+  run:
+    - python >=${{ python_min }}
+    - ffmpeg-python
     - numpy >=1.6
-    - pysoundfile >=0.9.0
 
 tests:
   - python:
@@ -38,7 +41,6 @@ tests:
         - "*"
       imports:
         - stempeg
-      pip_check: false
 
 about:
   license: MIT
@@ -51,5 +53,4 @@ about:
 extra:
   recipe-maintainers:
     - Faylixe
-
     - tetov
