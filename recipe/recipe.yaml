@@ -22,7 +22,7 @@ build:
 
 requirements:
   host:
-    - python
+    - python ${{ python_min }}.*
     - pip
   run:
     - python
@@ -33,6 +33,9 @@ requirements:
 
 tests:
   - python:
+      python_version:
+        - ${{ python_min }}.*
+        - "*"
       imports:
         - stempeg
       pip_check: false
