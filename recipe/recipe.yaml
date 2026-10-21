@@ -1,0 +1,56 @@
+schema_version: 1
+
+context:
+  name: stempeg
+  version: "0.2.6"
+  commit: a41eaabb6761c9cdc3a079c45a1a2ccd575afea6
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://github.com/faroit/${{ name }}/archive/${{ commit }}.tar.gz
+  sha256: 0c3ea84042d6fa20ecd26bb5d056ce74af7e68a6768f9b05f3651352394e4dc9
+  filter:
+    exclude:
+      - stempeg/data/*
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv
+  python:
+    entry_points:
+      - stem2files = stempeg.cli:cli
+
+requirements:
+  host:
+    - python ${{ python_min }}.*
+    - pip
+    - setuptools
+  run:
+    - python >=${{ python_min }}
+    - ffmpeg-python
+    - numpy >=1.6
+
+tests:
+  - python:
+      python_version:
+        - ${{ python_min }}.*
+        - "*"
+      imports:
+        - stempeg
+
+about:
+  license: MIT
+  license_file: LICENSE
+  summary: Python tool to read and write STEM files
+  homepage: https://github.com/faroit/stempeg
+  repository: https://github.com/faroit/stempeg
+  documentation: https://github.com/faroit/stempeg
+
+extra:
+  recipe-maintainers:
+    - Faylixe
+    - tetov
